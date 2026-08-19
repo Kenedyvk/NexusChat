@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="NexusChat: comunicação interna, suporte e gestão de recursos em uma única interface."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <title>NexusChat — Comunicação interna</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<div id="app" class="shell">
+  <aside class="rail">
+    <button type="button" class="brand-mark" aria-label="NexusChat" title="NexusChat">N</button>
+    <nav class="rail-nav" aria-label="Navegação principal">
+      <button type="button" class="rail-btn active" data-view="chat" aria-label="Conversas" title="Conversas"><span>◒</span></button>
+      <button type="button" class="rail-btn" data-view="rooms" aria-label="Salas" title="Salas"><span>▣</span></button>
+      <button type="button" class="rail-btn" data-view="people" aria-label="Pessoas" title="Pessoas"><span>◉</span></button>
+      <button type="button" class="rail-btn" data-view="admin" aria-label="Central Nexus" title="Central Nexus"><span>▦</span></button>
+    </nav>
+    <div class="rail-bottom">
+      <button class="rail-btn" title="Configurações"><span>⚙</span></button>
+      <button class="user-mini" id="userMenuBtn" title="Conta"><span>KV</span><i></i></button>
+    </div>
+  </aside>
+
+  <aside class="sidebar">
+    <header class="sidebar-header">
+      <div>
+        <strong>SEFA Nexus</strong>
+        <small>Workspace SEFA • DEMO</small>
+      </div>
+      <button class="ghost-btn" title="Nova conversa">＋</button>
+    </header>
+    <div class="sidebar-search">
+      <input id="conversationSearch" placeholder="Buscar conversas ou pessoas"/>
+      <kbd>Ctrl K</kbd>
+    </div>
+    <div class="tabs">
+      <button class="active">Conversas</button>
+      <button>Canais</button>
+    </div>
+    <div class="sidebar-scroll">
+      <div class="group-label"><span>Fixadas</span><span>2</span></div>
+      <div id="conversationList"></div>
+      <div class="group-label"><span>Canais</span><span>3</span></div>
+      <div id="channelList"></div>
+    </div>
+    <footer class="server-foot">
+      <div><i class="green-dot"></i><strong>Nexus Server</strong><small>Online • <span id="serverLatency">12</span> ms</small></div>
+      <span class="server-gem">◆</span>
+    </footer>
+  </aside>
+
+  <main class="workspace">
+    <section id="view-chat" class="view active-view">
+      <header class="chat-head">
+        <div class="chat-person">
+          <div class="avatar" id="activeAvatar">AS</div>
+          <div><strong id="activeName">Ana Souza</strong><small id="activeStatus"><i class="green-dot"></i> Online agora</small></div>
+        </div>
+        <div class="head-actions">
+          <button>⌕</button><button>◌</button><button>•••</button>
+        </div>
+      </header>
+      <div id="messageList" class="messages"></div>
+      <form id="messageForm" class="composer">
+        <button type="button" class="attach">＋</button>
+        <textarea id="messageInput" rows="1" placeholder="Escreva uma mensagem"></textarea>
+        <button type="submit" class="send">➤</button>
+      </form>
+    </section>
+
+    <section id="view-rooms" class="view">
+      <div class="page-head">
+        <div><span class="eyebrow">RECURSOS</span><h1>Agendamento de Salas</h1><p>Reserve espaços sem conflito de horário e com visibilidade por setor.</p></div>
+        <button class="primary-btn" id="newMeetingBtn">Nova reserva</button>
+      </div>
+      <div class="rooms-layout">
+        <div class="panel">
+          <div class="panel-head"><h3>Salas</h3><span id="roomSummary">3 espaços</span></div>
+          <div id="roomCards" class="room-grid"></div>
+        </div>
+        <div class="panel agenda-panel">
+          <div class="panel-head"><div><h3>Minha agenda</h3><small>Exibindo Tecnologia + reuniões gerais</small></div></div>
+          <div id="meetingList" class="meeting-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-people" class="view">
+      <div class="page-head">
+        <div><span class="eyebrow">DIRETÓRIO</span><h1>Pessoas</h1><p>Encontre rapidamente quem pode ajudar em cada setor.</p></div>
+      </div>
+      <div class="people-layout">
+        <div class="people-search"><input id="peopleSearch" placeholder="Buscar por nome, função ou setor" aria-label="Buscar pessoas"/></div>
+        <div id="peopleGrid" class="people-grid"></div>
+      </div>
+    </section>
+
+    <section id="view-admin" class="view">
+      <div class="page-head admin-head">
+        <div><span class="eyebrow">ADMINISTRAÇÃO</span><h1>Central Nexus</h1><p>Visão operacional do ambiente de comunicação.</p></div>
+        <span class="admin-chip">Administrador</span>
+      </div>
+      <div id="metricCards" class="metrics"></div>
+      <div class="admin-grid">
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>Atividade nas últimas horas</h3></div>
+          <div id="activityChart" class="bar-chart"></div>
+          <div class="chart-axis"><span>06h</span><span>11h</span><span>14h</span><span>17h</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Infraestrutura</h3></div>
+          <div id="serviceList" class="service-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="accountMenu" class="account-menu hidden">
+  <button>Meu perfil</button>
+  <button>Alterar status</button>
+  <button>Configurações</button>
+  <div class="menu-line"></div>
+  <button>Trocar de conta</button>
+  <button class="danger">Sair da conta</button>
+</div>
+
+<div id="meetingModal" class="modal-backdrop hidden">
+  <form id="meetingForm" class="modal">
+    <div class="modal-head"><div><span class="eyebrow">AGENDAMENTO</span><h2>Nova reserva</h2></div><button type="button" id="closeMeetingModal">×</button></div>
+    <label>Assunto<input name="title" required placeholder="Ex.: Alinhamento do projeto"/></label>
+    <div class="form-row">
+      <label>Sala<select name="roomId" id="roomSelect" required></select></label>
+      <label>Setor<select name="sector"><option>Tecnologia</option><option>Recursos Humanos</option><option>Financeiro</option><option>Geral</option></select></label>
+    </div>
+    <div class="form-row">
+      <label>Data<input name="date" id="meetingDate" type="date" required/></label>
+      <label>Visibilidade<select name="visibility"><option value="sector">Somente setor</option><option value="all">Todos</option></select></label>
+    </div>
+    <div class="form-row">
+      <label>Início<input name="start" type="time" required value="15:30"/></label>
+      <label>Fim<input name="end" type="time" required value="16:30"/></label>
+    </div>
+    <div id="meetingError" class="form-error"></div>
+    <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelMeeting">Cancelar</button><button class="primary-btn">Reservar sala</button></div>
+  </form>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

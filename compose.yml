@@ -1,0 +1,10 @@
+services:
+  sefa-nexus:
+    build: .
+    container_name: sefa-nexus-demo
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      HOST: 0.0.0.0
+    restart: unless-stopped
