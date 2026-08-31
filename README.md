@@ -1,64 +1,62 @@
 # NexusChat
 
-O NexusChat nasceu de uma necessidade simples: reunir, em um só lugar, as conversas e pequenas rotinas que costumam ficar espalhadas entre mensageiro, agenda e chamados de suporte.
+NexusChat is a functional internal communication and resource-management prototype built to centralize messaging, room scheduling and operational information in one application.
 
-Esta é uma base funcional para apresentação. Ela já tem interface própria, API em Fastify e comunicação em tempo real com Socket.IO. Os dados ainda são de demonstração e ficam em memória; o próximo passo é conectar autenticação e banco de dados.
+## Current capabilities
 
-## O que dá para testar
+- direct conversations and channels;
+- message delivery through a REST API;
+- internal people and department directory;
+- meeting-room scheduling with conflict detection;
+- department-based meeting visibility;
+- operational indicators in Central Nexus;
+- real-time updates with Socket.IO;
+- local execution with Node.js or Docker.
 
-- conversas individuais e canais;
-- envio de mensagens pela API;
-- diretório interno de pessoas e setores;
-- agendamento de salas com detecção de conflito;
-- reuniões filtradas por setor;
-- Central Nexus com indicadores operacionais;
-- atualização em tempo real com Socket.IO;
-- execução local com Node.js ou Docker.
-
-## Tecnologias
+## Tech stack
 
 - Node.js 24
 - Fastify
 - Socket.IO
-- HTML, CSS e JavaScript
+- HTML, CSS and JavaScript
 - Docker
 
-## Rodando na sua máquina
+## Running locally
 
-Com Node.js 24:
+With Node.js 24:
 
 ```bash
 npm install
 npm start
 ```
 
-Depois, abra `http://localhost:8080`.
+Open `http://localhost:8080`.
 
-Com Docker:
+With Docker:
 
 ```bash
 docker compose up --build
 ```
 
-No Windows, o arquivo `start.bat` escolhe automaticamente entre Docker e Node.js.
+On Windows, `start.bat` can choose between Docker and Node.js automatically.
 
-## Endpoints disponíveis
+## API endpoints
 
-| Método | Endpoint | Finalidade |
+| Method | Endpoint | Purpose |
 | --- | --- | --- |
-| GET | `/api/health` | Estado da aplicação |
-| GET | `/api/me` | Usuário da demonstração |
-| GET | `/api/conversations` | Conversas e canais |
-| GET | `/api/messages/:conversationId` | Histórico da conversa |
-| POST | `/api/messages` | Enviar mensagem |
-| GET | `/api/people` | Diretório interno |
-| GET | `/api/rooms` | Salas disponíveis |
-| GET | `/api/meetings` | Reuniões visíveis ao usuário |
-| POST | `/api/meetings` | Criar uma reserva |
-| GET | `/api/admin/metrics` | Indicadores da demonstração |
+| GET | `/api/health` | Application health |
+| GET | `/api/me` | Demo user |
+| GET | `/api/conversations` | Conversations and channels |
+| GET | `/api/messages/:conversationId` | Conversation history |
+| POST | `/api/messages` | Send message |
+| GET | `/api/people` | Internal directory |
+| GET | `/api/rooms` | Available rooms |
+| GET | `/api/meetings` | Meetings visible to the user |
+| POST | `/api/meetings` | Create a room reservation |
+| GET | `/api/admin/metrics` | Demo operational metrics |
 
-## Antes de virar produto
+## Production roadmap
 
-A demonstração não deve ser usada com dados reais. Para uma versão de produção ainda faltam banco persistente, autenticação, permissões por usuário, auditoria, armazenamento de anexos e testes automatizados.
+The current version uses demonstration data in memory and must not be used with real organizational data. The production-oriented evolution is being developed separately as **Nexus Platform**, with persistent storage, authentication, authorization, auditing and automated tests.
 
-O objetivo desta etapa é validar a experiência e deixar uma base clara para evoluir sem reconstruir o projeto a cada nova funcionalidade.
+This repository is kept as the functional prototype that validated the original product experience and real-time interaction model.
