@@ -2,6 +2,12 @@
 
 NexusChat is a functional internal communication and resource-management prototype built to centralize messaging, room scheduling and operational information in one application.
 
+## Public prototype demo
+
+**Interactive demo:** https://nexuschat-demo-eniac1.vercel.app
+
+The public browser demo reproduces the product experience with demonstration data so visitors can explore chat, room scheduling, people and Central Nexus. The actual Node.js/Fastify/Socket.IO implementation is the source code in this repository and can be run locally with Node.js or Docker.
+
 ## Current capabilities
 
 - direct conversations and channels;
